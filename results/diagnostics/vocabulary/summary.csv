@@ -1,0 +1,9 @@
+corpus,tokenizer,vocab_size,all_fertility,all_pct_split,content_fertility,content_pct_split,lexicon_fertility,lexicon_pct_split,pct_unk
+interviews (train),BETO (cased),31002,1.05,4.098,1.103,8.568,1.15,12.881,0.0
+interviews (train),e5 / XLM-R,250002,1.153,12.301,1.315,25.249,1.667,48.77,0.0
+interviews (train),BERTIN (RoBERTa-es),50262,1.048,4.212,1.099,8.694,1.205,18.735,0.0
+interviews (train),mDeBERTa-v3,250102,1.302,27.611,1.573,51.74,2.077,83.841,0.0
+mentalriskes,BETO (cased),31002,1.058,4.828,1.118,9.883,1.066,6.271,0.024
+mentalriskes,e5 / XLM-R,250002,1.161,13.448,1.326,26.992,1.267,25.743,0.0
+mentalriskes,BERTIN (RoBERTa-es),50262,1.048,4.31,1.096,8.528,1.069,6.931,0.0
+mentalriskes,mDeBERTa-v3,250102,1.286,26.696,1.516,47.783,1.66,62.376,0.0

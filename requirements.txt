@@ -1,0 +1,47 @@
+# Direct dependencies of this subproject, at the versions it was run with.
+#
+# This replaces a 159-package freeze of the virtual environment shared with
+# the sibling audio experiment. That file recorded what happened to be
+# installed rather than what this code imports, so it could not say which
+# versions a result actually depended on. Every entry below is imported by
+# something under src/, scripts/ or tests/; transitive dependencies are left
+# to pip to resolve.
+#
+# Pinned with == because the rows under results/ were produced with these
+# exact versions, and the study reports single-seed runs: a change in a
+# library default can move a number by as much as the arms differ from each
+# other.
+#
+#   ..\env\Scripts\python.exe -m pip install -r requirements.txt
+#
+# torch is listed without a CUDA suffix. The logged runs used a CUDA build
+# (2.11.0+cu128); install the wheel matching your driver from pytorch.org
+# rather than taking the default here. Only the frozen-encoder and
+# fine-tuning arms need a GPU -- the named-feature arms (E10-E15) are CPU
+# only and run in minutes.
+
+# --- numerics and modelling -------------------------------------------
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+scikit-learn==1.7.2
+lightgbm==4.7.0
+
+# --- Spanish NLP -------------------------------------------------------
+# es_core_news_sm supplies the tagger, morphologizer and lemmatizer that the
+# lexical features read. It is a package in its own right, not something
+# spacy downloads on demand, so it is pinned here like any other dependency.
+spacy==3.8.16
+es-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.8.0/es_core_news_sm-3.8.0-py3-none-any.whl
+nltk==3.10.3
+
+# --- transformers -------------------------------------------------------
+torch==2.11.0
+transformers==5.15.1
+sentence-transformers==6.0.1
+datasets==5.0.1
+
+# --- input, output, notebooks -------------------------------------------
+openpyxl==3.1.5
+matplotlib==3.10.9
+ipykernel==7.3.0

@@ -1,0 +1,7 @@
+feature_a,feature_b,abs_spearman
+n_words_total,words_per_answer_mean,0.9846
+hapax_rate,words_per_answer_mean,0.9438
+hapax_rate,n_words_total,0.9183
+fernandez_huerta,mean_sentence_len,0.8628
+n_words_total,words_per_answer_sd,0.8113
+sentence_len_sd,n_words_total,0.8033

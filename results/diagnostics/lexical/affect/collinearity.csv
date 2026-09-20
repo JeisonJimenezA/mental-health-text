@@ -1,0 +1,6 @@
+feature_a,feature_b,abs_spearman
+val_mean,val_high_rate,0.8374
+emo_fear_max,emo_sadness_max,0.8225
+emo_disgust_max,emo_fear_max,0.8189
+emo_disgust_max,emo_sadness_max,0.8039
+emo_disgust_max,emo_anger_max,0.8013
