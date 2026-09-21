@@ -130,25 +130,35 @@ participants.
 
 ## Where each family of representations lands
 
-The lowest PHQ-9 RMSE reached by each kind of representation, on the 48
-held-out participants, with that same arm's GAD-7 figure beside it. PHQ-9 is
-the primary endpoint (`PROTOCOL.md` Section 6); picking a different winner per
-target would be choosing twice from the same test set.
+The lowest RMSE reached by each kind of representation on the 48 held-out
+participants, per target. Each table picks its own winner, so the two do not
+list the same arms.
 
-| Representation | Best arm | PHQ-9 RMSE | R² | GAD-7 RMSE | R² |
-|---|---|---|---|---|---|
-| Frozen, off the shelf | `E2_E5LARGE` (question) | 4.634 | 0.289 | 4.541 | 0.186 |
-| Domain-adapted, frozen | `E1_BETO_MLM_EP010` | 4.838 | 0.225 | 4.395 | 0.237 |
-| Fine-tuned end to end | `E5_E5LARGE_FT` (question) | **4.263** | **0.398** | 4.860 | 0.067 |
-| Named features | `E12_LEXICAL_AFFECT` | 5.166 | 0.116 | 4.995 | 0.014 |
+### PHQ-9 (primary endpoint, scale 0-27)
 
-RMSE is in questionnaire points, on scales of 0-27 and 0-21.
+| Representation | Best arm | RMSE | MAE | R² |
+|---|---|---|---|---|
+| Frozen, off the shelf | `E2_E5LARGE` (question) | 4.634 | 3.826 | 0.289 |
+| Domain-adapted, frozen | `E1_BETO_MLM_EP010` | 4.838 | 3.900 | 0.225 |
+| Fine-tuned end to end | `E5_E5LARGE_FT` (question) | **4.263** | **3.294** | **0.398** |
+| Named features | `E12_LEXICAL_AFFECT` | 5.166 | 4.245 | 0.116 |
 
-The two targets are not on the same footing, which is why a GAD-7 R² can look
-low next to a respectable RMSE. R² is measured against each target's own
-spread on these 48 participants: 5.495 points for PHQ-9 and 5.031 for GAD-7.
-An arm has to beat those to reach R² = 0, so a GAD-7 RMSE of 4.86 is only
-just inside the line.
+### GAD-7 (secondary endpoint, scale 0-21)
+
+| Representation | Best arm | RMSE | MAE | R² |
+|---|---|---|---|---|
+| Frozen, off the shelf | `E2_E5LARGE` | 4.187 | 3.275 | 0.307 |
+| Domain-adapted, frozen | `E1_BETO_MLM_MR_EP010` | 4.393 | 3.518 | 0.237 |
+| Fine-tuned end to end | `E5_E5LARGE_FT` (question) | **4.082** | **2.945** | **0.342** |
+| Named features | `E13_LEXICAL_TFIDF_QUESTION` (question) | 4.816 | 4.005 | 0.084 |
+
+RMSE and MAE are in questionnaire points. MAE is reported alongside RMSE
+because it weights errors differently, and can rank arms differently when one
+of them makes a few large mistakes (`PROTOCOL.md` Section 6).
+
+R² is measured against each target's own spread on these participants: 5.495
+points for PHQ-9 and 5.031 for GAD-7. That is why a GAD-7 R² can look modest
+beside a respectable RMSE — the line an arm has to beat is lower.
 
 Four things this table does not say, all of which matter more than its
 ordering:
@@ -164,10 +174,11 @@ ordering:
 - **The winners are drawn from grids**, and the best cell of a grid is
   optimistic by construction. The number of arms scored on these same 48
   participants is large and growing (Section 13).
-- **No arm generalizes across both targets.** The best PHQ-9 arm is close to
-  the mean predictor on GAD-7, and the best GAD-7 arm is a different one
-  entirely. Any claim about "the best representation" has to say for which
-  questionnaire.
+- **Two tables means selecting twice from one test set.** Three of the four
+  families put a different arm at the top of each, and only `E5_E5LARGE_FT`
+  wins both. Reading each table as the best of its family is fine; reading
+  the pair as evidence that a representation works for both questionnaires is
+  not, because nothing here was chosen to satisfy the two at once.
 
 Full results, including every arm and both fold counts, are under `results/`.
 
