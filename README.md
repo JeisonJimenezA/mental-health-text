@@ -128,6 +128,51 @@ participants.
 
 ---
 
+## Where each family of representations lands
+
+The lowest PHQ-9 RMSE reached by each kind of representation, on the 48
+held-out participants, with that same arm's GAD-7 figure beside it. PHQ-9 is
+the primary endpoint (`PROTOCOL.md` Section 6); picking a different winner per
+target would be choosing twice from the same test set.
+
+| Representation | Best arm | PHQ-9 RMSE | R² | GAD-7 RMSE | R² |
+|---|---|---|---|---|---|
+| Frozen, off the shelf | `E2_E5LARGE` (question) | 4.634 | 0.289 | 4.541 | 0.186 |
+| Domain-adapted, frozen | `E1_BETO_MLM_EP010` | 4.838 | 0.225 | 4.395 | 0.237 |
+| Fine-tuned end to end | `E5_E5LARGE_FT` (question) | **4.263** | **0.398** | 4.860 | 0.067 |
+| Named features | `E12_LEXICAL_AFFECT` | 5.166 | 0.116 | 4.995 | 0.014 |
+
+RMSE is in questionnaire points, on scales of 0-27 and 0-21.
+
+The two targets are not on the same footing, which is why a GAD-7 R² can look
+low next to a respectable RMSE. R² is measured against each target's own
+spread on these 48 participants: 5.495 points for PHQ-9 and 5.031 for GAD-7.
+An arm has to beat those to reach R² = 0, so a GAD-7 RMSE of 4.86 is only
+just inside the line.
+
+Four things this table does not say, all of which matter more than its
+ordering:
+
+- **Each arm is a single run at one seed**, so none of these gaps can be read
+  against the noise of the procedure that produced it. Five-seed runs measured
+  that noise at up to 0.41 RMSE for the fine-tuned arms (`PROTOCOL.md`
+  Sections 10 and 13) — larger than most of the differences here.
+- **The rows were not produced by the same procedure.** The named-feature arms
+  choose among three candidate regressors, the others among nine, and the
+  named-feature arms also report two fold counts. A narrower pool is a
+  different selection procedure, not a fairer or worse one (Section 15.2).
+- **The winners are drawn from grids**, and the best cell of a grid is
+  optimistic by construction. The number of arms scored on these same 48
+  participants is large and growing (Section 13).
+- **No arm generalizes across both targets.** The best PHQ-9 arm is close to
+  the mean predictor on GAD-7, and the best GAD-7 arm is a different one
+  entirely. Any claim about "the best representation" has to say for which
+  questionnaire.
+
+Full results, including every arm and both fold counts, are under `results/`.
+
+---
+
 ## Running
 
 Point a kernel at the shared interpreter:
